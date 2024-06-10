@@ -1,7 +1,7 @@
 {
   "name": "com.metamonkey.customtools",
   "displayName": "Custom Tools",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "unity": "2020.3",
   "description": "A set of custom tools for unity.",
   "dependencies": {
