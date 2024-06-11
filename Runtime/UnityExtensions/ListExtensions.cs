@@ -1,9 +1,15 @@
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CustomTools.UnityExtensions
 {
     public static class ListExtensions
     {
+        public static string JoinToString<T>(this List<T> list, string separator = ",")
+        {
+            return string.Join(separator, list.Select((x => x.ToString())));
+        }
+        
         public static List<T> Shuffle<T>(this List<T> list, System.Random rng, int shuffleAmt = 1)
         {
             var count = list.Count;
