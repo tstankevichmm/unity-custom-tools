@@ -2,11 +2,13 @@
 
 All notable changes to this package will be documented in this file.
 
+## [1.0.6]
+Fixed an issue with IntWithMod not returning correct total value.
+
 ## [1.0.5]
 Adding Modifiable Values.
 
 The new ValueWithMod class in the ModifiableValue namespace adds functionality for creating values that can be altered by Modifiers. Alongside this, the BaseModifier class has been implemented to provide the Modifier objects used in the ValueWithMod class.
-
 
 ## [1.0.4]
 Added Observer class.<br><br>

@@ -112,7 +112,7 @@ namespace CustomTools.ModifiableValue
 
         public static implicit operator int(IntWithMods<T> mod)
         {
-            return mod.totalAmount;
+            return mod.totalAmount.Value;
         }
 
         protected override int Add(object a, object b)
@@ -136,7 +136,7 @@ namespace CustomTools.ModifiableValue
 
         public static implicit operator float(FloatWithMods<T> mod)
         {
-            return mod.totalAmount;
+            return mod.totalAmount.Value;
         }
 
         protected override float Add(object a, object b)
