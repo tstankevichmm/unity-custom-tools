@@ -35,6 +35,9 @@ namespace CustomTools.ModifiableValue
             
         public BaseModifier(IModifierValue<U> modifier, ModType type, T source = null) 
             : this(modifier, type, (int)type, source) { }
+        
+        public BaseModifier(IModifierValue<U> modifier, T source = null) 
+            : this(modifier, ModType.Flat, (int)ModType.Flat, source) { }
             
         public BaseModifier(IModifierValue<U> modifier, ModType type, int order, T source = null)
         {
