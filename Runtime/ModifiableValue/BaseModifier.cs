@@ -17,6 +17,11 @@ namespace CustomTools.ModifiableValue
         {
             ModObserver = new ObserverValue<T>(value);
         }
+
+        public override string ToString()
+        {
+            return ModObserver.Value.ToString();
+        }
     }
         
     public enum ModType

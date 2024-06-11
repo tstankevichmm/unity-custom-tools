@@ -2,8 +2,11 @@
 
 All notable changes to this package will be documented in this file.
 
+## [1.0.9]
+Added ToString method in BaseModifier class
+
 ## [1.0.8]
-Add JoinToString extension method to ListExtensions
+Added JoinToString extension method to ListExtensions
 
 ## [1.0.7]
 A new constructor has been added to the BaseModifier class, allowing it to take an IModifierValue and a source as parameters. The new constructor defaults to a ModType of "Flat".
