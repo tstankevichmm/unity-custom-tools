@@ -2,6 +2,9 @@
 
 All notable changes to this package will be documented in this file.
 
+## [1.0.11]
+Introduced changes to the EventBus system to process pending events more efficiently.
+
 ## [1.0.10]
 The EventBus system was modified to handle actions specific to each event type.<br><br>The 'callback' field in the 'EventData' struct and the 'Raise' methods in the 'EventBus' and 'LocalEventBus' classes now take an 'Action<T>', where 'T' is the type of the event, instead of a simple 'Action'.<br><br> This allows the callback invoked during event raising to have information about the event that was raised.
 

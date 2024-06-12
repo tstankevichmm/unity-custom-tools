@@ -39,6 +39,13 @@ namespace CustomTools.EventBusSystem
             };
             
             _eventQueue.Enqueue(eventData);
+            
+            if (!_eventInProgress)
+            {
+                RemoveAllPending();
+                AddAllPending();
+            }
+            
             RaiseNextEvent();
         }
 
