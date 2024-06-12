@@ -8,7 +8,7 @@ namespace CustomTools.EventBusSystem
     public struct EventData<T>
     {
         public T eventToRaise;
-        public Action callback;
+        public Action<T> callback;
     }
     
     public class EventBus<T> where T : IEvent
@@ -30,7 +30,7 @@ namespace CustomTools.EventBusSystem
 
         public void DeRegister(EventBinding<T> binding) => _pendingRemoval.Add(binding);//_bindings.Remove(binding);
 
-        public void Raise(T eventToRaise, Action callback = null)
+        public void Raise(T eventToRaise, Action<T> callback = null)
         {
             EventData<T> eventData = new EventData<T>()
             {
@@ -72,7 +72,7 @@ namespace CustomTools.EventBusSystem
                     await Task.Yield();
             }
 
-            nextEventData.callback?.Invoke();
+            nextEventData.callback?.Invoke(nextEventData.eventToRaise);
             
             RemoveAllPending();
             AddAllPending();
@@ -114,7 +114,7 @@ namespace CustomTools.EventBusSystem
 
         public static void Register(EventBinding<T> binding) => EventBus.Register(binding);
         public static void DeRegister(EventBinding<T> binding) => EventBus.DeRegister(binding);
-        public static void Raise(T @event, Action action = null) => EventBus.Raise(@event, action);
+        public static void Raise(T @event, Action<T> action = null) => EventBus.Raise(@event, action);
     }
 
     public class LocalEventBus
