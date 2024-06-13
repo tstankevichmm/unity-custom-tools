@@ -2,6 +2,9 @@
 
 All notable changes to this package will be documented in this file.
 
+## [1.0.12]
+Added auto global registration for EventBinding
+
 ## [1.0.11]
 Introduced changes to the EventBus system to process pending events more efficiently.
 

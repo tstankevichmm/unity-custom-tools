@@ -9,22 +9,36 @@ namespace CustomTools.EventBusSystem
         public Action<T> OnEvent { get; set; }
         public Action OnEventNoArgs { get; set; }
 
-        public EventBinding(Action<T, Action> onEventCallback, int priority = 0)
+        public EventBinding(Action<T, Action> onEventCallback, int priority = 0, bool autoRegisterGlobally = false)
         {
             OnEventCallback = onEventCallback;
             Priority = priority;
+            
+            if(autoRegisterGlobally)
+                AutoRegisterGlobally();
         }
 
-        public EventBinding(Action<T> onEvent, int priority = 0)
+        public EventBinding(Action<T> onEvent, int priority = 0, bool autoRegisterGlobally = false)
         {
             OnEvent = onEvent;
             Priority = priority;
+            
+            if(autoRegisterGlobally)
+                AutoRegisterGlobally();
         }
 
-        public EventBinding(Action onEventNoArgs, int priority = 0)
+        public EventBinding(Action onEventNoArgs, int priority = 0, bool autoRegisterGlobally = false)
         {
             OnEventNoArgs = onEventNoArgs;
             Priority = priority;
+            
+            if(autoRegisterGlobally)
+                AutoRegisterGlobally();
+        }
+
+        private void AutoRegisterGlobally()
+        {
+            GlobalEventBus<T>.Register(this);
         }
     }
 }
