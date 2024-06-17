@@ -2,8 +2,15 @@
 
 All notable changes to this package will be documented in this file.
 
+## [1.0.14]
+Add IComponent interface to unity-custom-tools.
+
+This commit introduces a new interface, IComponent, to the unity-custom-tools project. The interface, residing under the HelperInterfaces directory, defines several essential properties and methods like gameObject, transform, and GetComponent, which are staples of many components.
+
 ## [1.0.13]
-A new class, ScriptableObjectExtensions, has been added to the UnityExtensions namespace. <br>This includes a new LoadScriptableObject function, which can load ScriptableObject instances using their name. This functionality can aid in retrieving specific ScriptableObjects programmatically within Unity.
+A new class, ScriptableObjectExtensions, has been added to the UnityExtensions namespace.
+
+This includes a new LoadScriptableObject function, which can load ScriptableObject instances using their name. This functionality can aid in retrieving specific ScriptableObjects programmatically within Unity.
 
 ## [1.0.12]
 Added auto global registration for EventBinding
@@ -12,7 +19,11 @@ Added auto global registration for EventBinding
 Introduced changes to the EventBus system to process pending events more efficiently.
 
 ## [1.0.10]
-The EventBus system was modified to handle actions specific to each event type.<br><br>The 'callback' field in the 'EventData' struct and the 'Raise' methods in the 'EventBus' and 'LocalEventBus' classes now take an 'Action<T>', where 'T' is the type of the event, instead of a simple 'Action'.<br><br> This allows the callback invoked during event raising to have information about the event that was raised.
+The EventBus system was modified to handle actions specific to each event type.
+
+The 'callback' field in the 'EventData' struct and the 'Raise' methods in the 'EventBus' and 'LocalEventBus' classes now take an 'Action<T>', where 'T' is the type of the event, instead of a simple 'Action'.
+
+This allows the callback invoked during event raising to have information about the event that was raised.
 
 ## [1.0.9]
 Added ToString method in BaseModifier class
@@ -32,7 +43,8 @@ Adding Modifiable Values.
 The new ValueWithMod class in the ModifiableValue namespace adds functionality for creating values that can be altered by Modifiers. Alongside this, the BaseModifier class has been implemented to provide the Modifier objects used in the ValueWithMod class.
 
 ## [1.0.4]
-Added Observer class.<br><br>
+Added Observer class.
+
 A new Observer namespace was introduced along with ObserverValue class, providing functionality to observe variable changes in Unity.
 
 ## [1.0.3]
