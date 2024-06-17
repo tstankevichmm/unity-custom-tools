@@ -6,17 +6,16 @@ namespace CustomTools.UnityExtensions
 {
     public static class ScriptableObjectExtensions
     {
-        public static T LoadScriptableObject<T>(string soName) where T : ScriptableObject
+        public static T LoadScriptableObject<T>(string searchFilter) where T : ScriptableObject
         {
-            string scriptableObjectName = soName;
-            string[] guids = AssetDatabase.FindAssets($"t:{nameof(T)} {scriptableObjectName}");
-
+            string[] guids = AssetDatabase.FindAssets(searchFilter);
+            
             if (guids.Length == 0)
-                throw new Exception($"No {nameof(T)} found named {scriptableObjectName}");
+                throw new Exception($"No {nameof(T)} found with filter: {searchFilter}");
 
             if (guids.Length > 0)
                 Debug.LogWarning(
-                    $"More than one {nameof(T)} found named {scriptableObjectName}, taking first one");
+                    $"More than one {nameof(T)} found with filter: {searchFilter}, taking first one");
 
             return (T)AssetDatabase.LoadAssetAtPath(AssetDatabase.GUIDToAssetPath(guids[0]),
                 typeof(T));
