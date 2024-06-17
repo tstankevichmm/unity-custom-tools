@@ -14,7 +14,7 @@ namespace CustomTools.UnityExtensions
             if (guids.Length == 0)
                 throw new Exception($"No {nameof(T)} found with filter: {searchFilter}");
 
-            if (guids.Length > 0)
+            if (guids.Length > 1)
             {
                 string allFound = guids.ToList().JoinToString();
                 Debug.LogWarning(
