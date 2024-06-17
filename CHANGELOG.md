@@ -2,6 +2,9 @@
 
 All notable changes to this package will be documented in this file.
 
+## [1.0.13]
+A new class, ScriptableObjectExtensions, has been added to the UnityExtensions namespace. <br>This includes a new LoadScriptableObject function, which can load ScriptableObject instances using their name. This functionality can aid in retrieving specific ScriptableObjects programmatically within Unity.
+
 ## [1.0.12]
 Added auto global registration for EventBinding
 
