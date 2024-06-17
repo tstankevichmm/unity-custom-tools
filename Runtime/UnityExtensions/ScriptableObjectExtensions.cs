@@ -8,7 +8,7 @@ namespace CustomTools.UnityExtensions
     {
         public static T LoadScriptableObject<T>(string soName) where T : ScriptableObject
         {
-            string scriptableObjectName = "ScriptableObjectName";
+            string scriptableObjectName = soName;
             string[] guids = AssetDatabase.FindAssets($"t:{nameof(T)} {scriptableObjectName}");
 
             if (guids.Length == 0)
