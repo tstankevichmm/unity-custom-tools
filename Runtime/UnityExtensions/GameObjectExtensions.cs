@@ -16,6 +16,18 @@ namespace CustomTools.UnityExtensions
             return component;
         }
 
+        public static void SetActive(this GameObject[] gameObjectArray, bool isActive)
+        {
+            if (isActive)
+            {
+                gameObjectArray.Show();
+            }
+            else
+            {
+                gameObjectArray.Hide();
+            }
+        }
+
         public static void Hide(this GameObject[] gameObjectArray)
         {
             foreach (GameObject gameObject in gameObjectArray)

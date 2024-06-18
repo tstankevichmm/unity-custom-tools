@@ -2,6 +2,11 @@
 
 All notable changes to this package will be documented in this file.
 
+## [1.0.15]
+Add SetActive method to GameObjectExtensions
+
+The newly added SetActive method allows an array of GameObjects to be simultaneously set to active or inactive. If isActive is true, it will show all GameObjects within the array, but if it is false, it will hide them.
+
 ## [1.0.14]
 Add IComponent interface to unity-custom-tools.
 
