@@ -2,6 +2,11 @@
 
 All notable changes to this package will be documented in this file.
 
+## [1.0.16]
+Add ExtendedButton class in UIExtensions
+
+A new ExtendedButton class has been added to the UIExtensions namespace. This class extends Unity's standard Button with additional functionality including support for right and middle click events. It also includes methods to execute specific code when these events occur
+
 ## [1.0.15]
 Add SetActive method to GameObjectExtensions
 
