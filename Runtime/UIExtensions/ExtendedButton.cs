@@ -8,7 +8,6 @@ namespace CustomTools.UIExtensions
     public class ExtendedButton : Button
     {
         [SerializeField] private ButtonClickedEvent _onRightClick = new();
-
         [SerializeField] private ButtonClickedEvent _onMiddleClick = new();
 
         public ButtonClickedEvent onRightClick

@@ -2,6 +2,11 @@
 
 All notable changes to this package will be documented in this file.
 
+## [1.0.17]
+Added UI extensions and editor features
+
+This commit includes the addition of new files related to Unity UI extensions and various editor features. The changes particularly include 'ExtendedButton.cs' and 'ExtendedButton_Inspector.cs' scripts, along with their respective metadata. Moreover, the 'com.metamonkey.customtools.Editor.asmdef' file was created, detailing assembly definition for the editor's tools.
+
 ## [1.0.16]
 Add ExtendedButton class in UIExtensions
 

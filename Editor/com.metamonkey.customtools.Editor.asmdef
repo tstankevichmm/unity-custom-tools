@@ -1,0 +1,16 @@
+{
+    "name": "com.metamonkey.customtools.Editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:ea6a1edc0a9486d498df90a99117ab74"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
