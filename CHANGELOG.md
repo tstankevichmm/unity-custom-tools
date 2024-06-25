@@ -2,6 +2,9 @@
 
 All notable changes to this package will be documented in this file.
 
+## [1.0.18]
+This commit introduces a new SingletonMonoBehaviour class in the Unity custom tools runtime. This class creates a singleton of MonoBehaviour that survives scene changes in Unity Engine. The SingletonMonoBehaviour ensures that only one instance of a MonoBehaviour exists, and this instance is reusable across the entire project.
+
 ## [1.0.17]
 Added UI extensions and editor features
 
