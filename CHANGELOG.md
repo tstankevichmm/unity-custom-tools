@@ -2,6 +2,11 @@
 
 All notable changes to this package will be documented in this file.
 
+## [1.0.20]
+Add VersionProcessor to Preprocess Build stage
+
+This commit introduces a new VersionProcessor class to the VersionSystem in Unity editor tools. It is designed to preprocess the build, find and validate the current version, and then update it. The automatic handling of versions simplifies the update process and ensures a proper version format before each build
+
 ## [1.0.19]
 Add scene management scripts and metadata
 
