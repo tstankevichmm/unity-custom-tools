@@ -2,6 +2,16 @@
 
 All notable changes to this package will be documented in this file.
 
+## [1.0.22]
+Add Compressor class for string compression
+
+The commit introduces a new Compressor class in the Compression folder. Compressor provides static methods for compressing and decompressing strings, utilizing UTF8 encoding and GZipStream for the actual compression and decompression process
+
+## [1.0.21]
+Add WebTools for custom web requests
+
+This commit adds a new namespace, CustomTools.WebTools, to handle web requests. The new module provides a comprehensive set of functionalities including GET, POST, and DELETE methods for making requests, and parsing responses. The ErrorResponse and WebResponse classes have been added to handle the responses
+
 ## [1.0.20]
 Add VersionProcessor to Preprocess Build stage
 
