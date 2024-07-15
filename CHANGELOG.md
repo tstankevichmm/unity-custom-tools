@@ -2,6 +2,11 @@
 
 All notable changes to this package will be documented in this file.
 
+## [1.0.24]
+Wrapped editor scripts in UNITY_EDITOR directives
+
+This commit wraps the ExtendedButton_Inspector.cs and GameSceneSOEditor.cs scripts in UNITY_EDITOR preprocessor directives. This is done to prevent errors when building the application, as certain functions are meant to work strictly in the editor environment
+
 ## [1.0.23]
 Add UNITY_EDITOR directive to ScriptableObjectExtensions
 

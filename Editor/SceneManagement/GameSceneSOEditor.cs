@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿#if UNITY_EDITOR
+
+using System.IO;
 using System.Linq;
 using UnityEditor;
 using UnityEditor.SceneManagement;
@@ -72,3 +74,5 @@ namespace CustomTools.SceneManagement
         }
     }
 }
+
+#endif

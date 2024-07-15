@@ -1,7 +1,7 @@
+#if UNITY_EDITOR
 using CustomTools.UIExtensions;
 using UnityEditor;
 using UnityEditor.UI;
-using UnityEngine;
 
 [CustomEditor(typeof(ExtendedButton))]
 public class ExtendedButton_Inspector : ButtonEditor
@@ -34,3 +34,4 @@ public class ExtendedButton_Inspector : ButtonEditor
         serializedObject.ApplyModifiedProperties();
     }
 }
+#endif
