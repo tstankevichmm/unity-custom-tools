@@ -2,6 +2,11 @@
 
 All notable changes to this package will be documented in this file.
 
+## [1.0.25]
+Wrap VersionProcessor in UNITY_EDITOR directive
+
+The main change in this commit involves wrapping the VersionProcessor class found in VersionSystem directory in a UNITY_EDITOR directive. This ensures that the VersionProcessor class is only compiled and included in the build when testing within the Unity Editor, thereby optimizing the performance and size of the final build.
+
 ## [1.0.24]
 Wrapped editor scripts in UNITY_EDITOR directives
 
