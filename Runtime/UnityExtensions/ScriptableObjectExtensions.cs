@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace CustomTools.UnityExtensions
 {
+    #if UNITY_EDITOR
     public static class ScriptableObjectExtensions
     {
         public static T LoadScriptableObject<T>(string searchFilter) where T : ScriptableObject
@@ -25,4 +26,5 @@ namespace CustomTools.UnityExtensions
                 typeof(T));
         }
     }
+    #endif
 }

@@ -2,6 +2,11 @@
 
 All notable changes to this package will be documented in this file.
 
+## [1.0.23]
+Add UNITY_EDITOR directive to ScriptableObjectExtensions
+
+The UNITY_EDITOR directive was added to the ScriptableObjectExtensions class. This ensures that the class and its methods are only active in the Unity editor, preventing potential issues in the final build.
+
 ## [1.0.22]
 Add Compressor class for string compression
 
