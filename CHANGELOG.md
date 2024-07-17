@@ -2,6 +2,11 @@
 
 All notable changes to this package will be documented in this file.
 
+## [1.0.27]
+Update HasCommandLineArgument method in CommandLine class
+
+The HasCommandLineArgument method in the CommandLine class has been updated to also return the following argument data if it exists. Instead of only checking if the argument exists, the method now loops through the arguments, and when it finds a match, it assigns the following argument to a data parameter and returns true.
+
 ## [1.0.26]
 This new utility, named CommandLine, has been added under the SystemTools. The utility includes a method to check if a certain command line argument exists. It simplifies handling of command line arguments and increases code readability
 
