@@ -2,6 +2,9 @@
 
 All notable changes to this package will be documented in this file.
 
+## [1.0.26]
+This new utility, named CommandLine, has been added under the SystemTools. The utility includes a method to check if a certain command line argument exists. It simplifies handling of command line arguments and increases code readability
+
 ## [1.0.25]
 Wrap VersionProcessor in UNITY_EDITOR directive
 
