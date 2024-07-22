@@ -2,6 +2,11 @@
 
 All notable changes to this package will be documented in this file.
 
+## [1.0.28]
+Add Database System script and metadata files
+
+The new files implement a database system that stores and processes data records. The DatabaseSO class is generic, allows for handling different types of records, and provides methods for record updates, cleaning, and ID duplication checks. The other files are related to Unity's system for asset identification and tracking changes during runtime
+
 ## [1.0.27]
 Update HasCommandLineArgument method in CommandLine class
 
