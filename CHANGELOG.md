@@ -2,6 +2,11 @@
 
 All notable changes to this package will be documented in this file.
 
+## [1.0.29]
+Add BasicMonoBehaviourEvents class
+
+A new class, BasicMonoBehaviourEvents, has been added to handle common Unity events. This class provides UnityEvents for standard MonoBehaviour callbacks such as Awake, Start, Enable, Disable, and Destroy. To provide better organization, the class is located within the CustomTools.UnityEvents namespace.
+
 ## [1.0.28]
 Add Database System script and metadata files
 
