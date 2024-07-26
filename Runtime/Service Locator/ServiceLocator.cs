@@ -122,6 +122,12 @@ namespace CustomTools.ServiceLocator
             return this;
         }
 
+        public ServiceLocator DeRegister(Type type, object service)
+        {
+            _serviceManager.DeRegister(type, service);
+            return this;
+        }
+
         public ServiceLocator Get<T>(out T service) where T : class
         {
             if (TryGetService(out service))

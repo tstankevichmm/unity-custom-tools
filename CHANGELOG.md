@@ -2,6 +2,11 @@
 
 All notable changes to this package will be documented in this file.
 
+## [1.0.30]
+Add DeRegister method to ServiceManager and ServiceLocator
+
+The DeRegister method allows services to be removed from the ServiceManager and ServiceLocator. This addition includes debug logs for error handling when deregistering non-existent or mismatched services.
+
 ## [1.0.29]
 Add BasicMonoBehaviourEvents class
 

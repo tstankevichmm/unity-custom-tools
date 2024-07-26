@@ -58,5 +58,22 @@ namespace CustomTools.ServiceLocator
 
             return this;
         }
+
+        public ServiceManager DeRegister(Type type, object service)
+        {
+            if (!_services.TryGetValue(type, out object obj))
+            {
+                Debug.LogError($"ServiceManager.DeRegister: Tried to DeRegister type {type.FullName}, but no object was registered with that type");
+                return this;
+            }
+
+            if (service != obj)
+            {
+                Debug.LogError($"ServiceManager.DeRegister: Object passed in does not match the object that was registered");
+            }
+            
+            _services.Remove(type);
+            return this;
+        }
     }
 }
