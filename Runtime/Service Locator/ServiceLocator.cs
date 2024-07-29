@@ -112,18 +112,21 @@ namespace CustomTools.ServiceLocator
 
         public ServiceLocator Register<T>(T service, bool overrideCurrent)
         {
+            Debug.Log($"Registering type {service.GetType().FullName}");
             _serviceManager.Register(service, overrideCurrent);
             return this;
         }
 
         public ServiceLocator Register(Type type, object service, bool overrideCurrent)
         {
+            Debug.Log($"Registering type {nameof(type.FullName)}");
             _serviceManager.Register(type, service, overrideCurrent);
             return this;
         }
 
         public ServiceLocator DeRegister(Type type, object service)
         {
+            Debug.Log($"DeRegistering type {nameof(type.FullName)}");
             _serviceManager.DeRegister(type, service);
             return this;
         }

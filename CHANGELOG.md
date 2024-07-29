@@ -2,6 +2,11 @@
 
 All notable changes to this package will be documented in this file.
 
+## [1.0.34]
+Add debug logs for service registration and deregistration
+
+Included debug statements to log detailed information when services are registered or deregistered in both ServiceManager and ServiceLocator classes. This will help in better tracking of service lifecycle events for debugging purposes.
+
 ## [1.0.33]
 Remove default value from Register method's override parameter
 

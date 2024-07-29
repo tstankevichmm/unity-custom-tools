@@ -74,12 +74,14 @@ namespace CustomTools.ServiceLocator
                 Debug.LogError($"ServiceManager.DeRegister: Object passed in does not match the object that was registered");
             }
             
+            Debug.Log($"Deregister type {nameof(type.FullName)}");
             _services.Remove(type);
             return this;
         }
 
         public ServiceManager DeRegisterCurrent(Type type)
         {
+            Debug.Log($"Deregister current {nameof(type.FullName)}");
             _services.Remove(type);
             return this;
         }
