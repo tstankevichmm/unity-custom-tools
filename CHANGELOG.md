@@ -2,6 +2,11 @@
 
 All notable changes to this package will be documented in this file.
 
+## [1.0.36]
+Fix log message errors in ServiceManager.cs
+
+Corrected improper usage of nameof operator in log strings to ensure accurate type names are printed. This change improves debugging clarity by correctly displaying the full type names in log messages
+
 ## [1.0.35]
 Fix debug logs in ServiceLocator register and deregister methods
 
