@@ -2,6 +2,11 @@
 
 All notable changes to this package will be documented in this file.
 
+## [1.0.35]
+Fix debug logs in ServiceLocator register and deregister methods
+
+Corrected debug log statements to properly display type names. This change enhances the clarity and accuracy of log outputs for better debugging and monitoring
+
 ## [1.0.34]
 Add debug logs for service registration and deregistration
 
