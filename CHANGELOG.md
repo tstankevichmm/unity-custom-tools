@@ -2,6 +2,11 @@
 
 All notable changes to this package will be documented in this file.
 
+## [1.0.31]
+Add override option to ServiceManager and ServiceLocator registration
+
+Modified the `Register` methods in `ServiceManager` and `ServiceLocator` to include an `overrideCurrent` parameter. This allows previously registered services to be replaced if the override flag is set to true, enhancing the flexibility and control over service management
+
 ## [1.0.30]
 Add DeRegister method to ServiceManager and ServiceLocator
 

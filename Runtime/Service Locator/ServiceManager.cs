@@ -32,28 +32,33 @@ namespace CustomTools.ServiceLocator
             throw new ArgumentException($"ServiceManager.Get: Service of type {type.FullName} is not registered");
         }
 
-        public ServiceManager Register<T>(T service)
+        public ServiceManager Register<T>(T service, bool overrideCurrent)
         {
             Type type = typeof(T);
-
-            if (!_services.TryAdd(type, service))
-            {
-                Debug.LogError($"ServiceManager.Register: Service of type {type.FullName} already registered");
-            }
-
-            return this;
+            return Register(type, service, overrideCurrent);
         }
 
-        public ServiceManager Register(Type type, object service)
+        public ServiceManager Register(Type type, object service, bool overrideCurrent)
         {
             if (!type.IsInstanceOfType(service))
             {
                 throw new ArgumentException("Type of service does not match type of service interface", nameof(service));
             }
 
-            if (!_services.TryAdd(type, service))
+            if (_services.ContainsKey(type))
             {
-                Debug.LogError($"ServiceManager.Register: Service of type {type.FullName} already registered");
+                if (!overrideCurrent)
+                {
+                    Debug.LogError($"ServiceManager.Register: Service of type {type.FullName} already registered");
+                }
+                else
+                {
+                    DeRegisterCurrent(type);
+                }
+            }
+            else if (!_services.TryAdd(type, service))
+            {
+                Debug.LogError($"ServiceManager.Register: Error when trying to add type {nameof(type)}");
             }
 
             return this;
@@ -72,6 +77,12 @@ namespace CustomTools.ServiceLocator
                 Debug.LogError($"ServiceManager.DeRegister: Object passed in does not match the object that was registered");
             }
             
+            _services.Remove(type);
+            return this;
+        }
+
+        public ServiceManager DeRegisterCurrent(Type type)
+        {
             _services.Remove(type);
             return this;
         }
