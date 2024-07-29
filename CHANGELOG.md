@@ -2,6 +2,11 @@
 
 All notable changes to this package will be documented in this file.
 
+## [1.0.33]
+Remove default value from Register method's override parameter
+
+The `Register` methods in `ServiceLocator` no longer have a default value for the `overrideCurrent` parameter. This change ensures that the caller must explicitly specify whether existing services should be overridden, reducing potential errors from unintended behavior
+
 ## [1.0.32]
 Refactor ServiceManager registration logic
 

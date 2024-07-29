@@ -110,13 +110,13 @@ namespace CustomTools.ServiceLocator
             return Global;
         }
 
-        public ServiceLocator Register<T>(T service, bool overrideCurrent = false)
+        public ServiceLocator Register<T>(T service, bool overrideCurrent)
         {
             _serviceManager.Register(service, overrideCurrent);
             return this;
         }
 
-        public ServiceLocator Register(Type type, object service, bool overrideCurrent = false)
+        public ServiceLocator Register(Type type, object service, bool overrideCurrent)
         {
             _serviceManager.Register(type, service, overrideCurrent);
             return this;
