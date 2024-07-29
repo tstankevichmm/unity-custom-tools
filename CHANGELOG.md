@@ -2,6 +2,11 @@
 
 All notable changes to this package will be documented in this file.
 
+## [1.0.32]
+Refactor ServiceManager registration logic
+
+Simplify the service registration process by removing unnecessary error logging and ensuring services can be overridden if specified. This enhances readability and ensures the correct error message is displayed when a service fails to register
+
 ## [1.0.31]
 Add override option to ServiceManager and ServiceLocator registration
 

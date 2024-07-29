@@ -47,18 +47,15 @@ namespace CustomTools.ServiceLocator
 
             if (_services.ContainsKey(type))
             {
-                if (!overrideCurrent)
-                {
-                    Debug.LogError($"ServiceManager.Register: Service of type {type.FullName} already registered");
-                }
-                else
+                if(overrideCurrent)
                 {
                     DeRegisterCurrent(type);
                 }
             }
-            else if (!_services.TryAdd(type, service))
+            
+            if (!_services.TryAdd(type, service))
             {
-                Debug.LogError($"ServiceManager.Register: Error when trying to add type {nameof(type)}");
+                Debug.LogError($"ServiceManager.Register: Error when trying to add type {nameof(type)}. Service of type {type.FullName} already registered");
             }
 
             return this;
