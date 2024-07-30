@@ -110,13 +110,6 @@ namespace CustomTools.ServiceLocator
             return Global;
         }
 
-        public ServiceLocator Register<T>(T service, bool overrideCurrent)
-        {
-            Debug.Log($"Registering type {service.GetType().FullName}");
-            _serviceManager.Register(service, overrideCurrent);
-            return this;
-        }
-
         public ServiceLocator Register(Type type, object service, bool overrideCurrent)
         {
             Debug.Log($"Registering type {type.FullName}");

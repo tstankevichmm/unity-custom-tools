@@ -32,12 +32,6 @@ namespace CustomTools.ServiceLocator
             throw new ArgumentException($"ServiceManager.Get: Service of type {type.FullName} is not registered");
         }
 
-        public ServiceManager Register<T>(T service, bool overrideCurrent)
-        {
-            Type type = typeof(T);
-            return Register(type, service, overrideCurrent);
-        }
-
         public ServiceManager Register(Type type, object service, bool overrideCurrent)
         {
             if (!type.IsInstanceOfType(service))

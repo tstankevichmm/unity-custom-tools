@@ -11,7 +11,7 @@ namespace CustomTools.ServiceLocator
         {
             foreach (Object service in _services)
             {
-                ServiceLocator.Global.Register(service.GetType(), service);
+                ServiceLocator.Global.Register(service.GetType(), service, false);
             }
         }
     }

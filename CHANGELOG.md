@@ -2,6 +2,11 @@
 
 All notable changes to this package will be documented in this file.
 
+## [1.0.38]
+Refactor service registration functions.
+
+Removed redundant generic overloads for service registration across ServiceLocator, ServiceManager, and ServiceLocatorHelperGlobal classes. This streamlines the API, reducing potential confusion and maintaining consistency in method signatures.
+
 ## [1.0.37]
 Log error and change exception to return self
 
