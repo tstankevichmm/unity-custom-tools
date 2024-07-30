@@ -142,7 +142,8 @@ namespace CustomTools.ServiceLocator
                 return this;
             }
 
-            throw new ArgumentException($"ServiceLocator.Get: Service of type {typeof(T).FullName} is not registered.");
+            Debug.LogError($"ServiceLocator.Get: Service of type {typeof(T).FullName} is not registered.");
+            return this;
         }
 
         public bool TryGetService<T>(out T service) where T : class

@@ -2,6 +2,11 @@
 
 All notable changes to this package will be documented in this file.
 
+## [1.0.37]
+Log error and change exception to return self
+
+Replaced the throw of ArgumentException with a Debug.LogError call to provide better debugging information. Additionally, modified the method to return the instance instead of throwing an exception when a service is not registered, improving resilience
+
 ## [1.0.36]
 Fix log message errors in ServiceManager.cs
 
