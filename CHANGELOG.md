@@ -2,6 +2,11 @@
 
 All notable changes to this package will be documented in this file.
 
+## [1.0.39]
+Change Debug.LogError to Debug.LogWarning for non-critical issues
+
+This update changes `Debug.LogError` to `Debug.LogWarning` in `ServiceManager.cs` and `ServiceLocator.cs` for scenarios where the issues are non-critical and do not require immediate error attention. This will make the log output clearer and categorize the warnings appropriately without disrupting the error logs.
+
 ## [1.0.38]
 Refactor service registration functions.
 

@@ -26,7 +26,7 @@ namespace CustomTools.ServiceLocator
             }
             else if (_global != null)
             {
-                Debug.LogError("ServiceLocator.ConfigureAsGlobal: Another ServiceLocator is already configured as global", this);
+                Debug.LogWarning("ServiceLocator.ConfigureAsGlobal: Another ServiceLocator is already configured as global", this);
             }
             else
             {
@@ -42,7 +42,7 @@ namespace CustomTools.ServiceLocator
 
             if (_sceneContainers.ContainsKey(scene))
             {
-                Debug.LogError("ServiceLocator.ConfigureForScene: Another ServiceLocator is already configured for this scene", this);
+                Debug.LogWarning("ServiceLocator.ConfigureForScene: Another ServiceLocator is already configured for this scene", this);
             }
             else
             {
@@ -135,7 +135,7 @@ namespace CustomTools.ServiceLocator
                 return this;
             }
 
-            Debug.LogError($"ServiceLocator.Get: Service of type {typeof(T).FullName} is not registered.");
+            Debug.LogWarning($"ServiceLocator.Get: Service of type {typeof(T).FullName} is not registered.");
             return this;
         }
 

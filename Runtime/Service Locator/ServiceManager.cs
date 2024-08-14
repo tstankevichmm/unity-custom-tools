@@ -49,7 +49,7 @@ namespace CustomTools.ServiceLocator
             
             if (!_services.TryAdd(type, service))
             {
-                Debug.LogError($"ServiceManager.Register: Error when trying to add type {type.FullName}. Service of type {type.FullName} already registered");
+                Debug.LogWarning($"ServiceManager.Register: Error when trying to add type {type.FullName}. Service of type {type.FullName} already registered");
             }
 
             return this;
@@ -59,13 +59,13 @@ namespace CustomTools.ServiceLocator
         {
             if (!_services.TryGetValue(type, out object obj))
             {
-                Debug.LogError($"ServiceManager.DeRegister: Tried to DeRegister type {type.FullName}, but no object was registered with that type");
+                Debug.LogWarning($"ServiceManager.DeRegister: Tried to DeRegister type {type.FullName}, but no object was registered with that type");
                 return this;
             }
 
             if (service != obj)
             {
-                Debug.LogError($"ServiceManager.DeRegister: Object passed in does not match the object that was registered");
+                Debug.LogWarning($"ServiceManager.DeRegister: Object passed in does not match the object that was registered");
             }
             
             Debug.Log($"Deregister type {type.FullName}");
