@@ -2,6 +2,11 @@
 
 All notable changes to this package will be documented in this file.
 
+## [1.0.40]
+Add Timer and CountdownTimer classes
+
+Introduce a base Timer class with start, stop, pause, and resume functionality. Added CountdownTimer subclass implementing a countdown mechanism, including a reset function. These utilities are part of the custom tools for Unity
+
 ## [1.0.39]
 Change Debug.LogError to Debug.LogWarning for non-critical issues
 
