@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 
 namespace CustomTools.UnityExtensions
@@ -44,6 +45,17 @@ namespace CustomTools.UnityExtensions
         {
             foreach (Transform child in transform)
             {
+                Object.Destroy(child.gameObject);
+            }
+        }
+        
+        public static void DestroyChildren(this Transform transform, Transform[] ignoreTransforms)
+        {
+            foreach (Transform child in transform)
+            {
+                if(ignoreTransforms.Contains(child))
+                    continue;
+                
                 Object.Destroy(child.gameObject);
             }
         }

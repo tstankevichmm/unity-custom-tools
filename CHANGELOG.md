@@ -2,6 +2,8 @@
 
 All notable changes to this package will be documented in this file.
 
+## [1.0.42]
+Added another overload to the DestroyChildren function that will allow for ignoring transforms.
 
 ## [1.0.41]
 Added the ability to register/deregister globally directly from an EventBinding
