@@ -2,6 +2,10 @@
 
 All notable changes to this package will be documented in this file.
 
+
+## [1.0.41]
+Added the ability to register/deregister globally directly from an EventBinding
+
 ## [1.0.40]
 Add Timer and CountdownTimer classes
 

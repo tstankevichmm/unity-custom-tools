@@ -15,7 +15,7 @@ namespace CustomTools.EventBusSystem
             Priority = priority;
             
             if(autoRegisterGlobally)
-                AutoRegisterGlobally();
+                RegisterGlobally();
         }
 
         public EventBinding(Action<T> onEvent, int priority = 0, bool autoRegisterGlobally = false)
@@ -24,7 +24,7 @@ namespace CustomTools.EventBusSystem
             Priority = priority;
             
             if(autoRegisterGlobally)
-                AutoRegisterGlobally();
+                RegisterGlobally();
         }
 
         public EventBinding(Action onEventNoArgs, int priority = 0, bool autoRegisterGlobally = false)
@@ -33,10 +33,15 @@ namespace CustomTools.EventBusSystem
             Priority = priority;
             
             if(autoRegisterGlobally)
-                AutoRegisterGlobally();
+                RegisterGlobally();
+        }
+        
+        public void DeRegisterGlobally()
+        {
+            GlobalEventBus<T>.DeRegister(this);
         }
 
-        private void AutoRegisterGlobally()
+        public void RegisterGlobally()
         {
             GlobalEventBus<T>.Register(this);
         }
