@@ -2,6 +2,11 @@
 
 All notable changes to this package will be documented in this file.
 
+## [1.0.43]
+Added Animation Event System.
+
+Introduced an animation event system based on Unity's AnimationStateBehaviours
+
 ## [1.0.42]
 Added another overload to the DestroyChildren function that will allow for ignoring transforms.
 

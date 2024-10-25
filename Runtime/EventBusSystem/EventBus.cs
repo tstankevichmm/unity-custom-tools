@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using UnityEngine;
 
 namespace CustomTools.EventBusSystem
 {
@@ -122,6 +121,11 @@ namespace CustomTools.EventBusSystem
         public static void Register(EventBinding<T> binding) => EventBus.Register(binding);
         public static void DeRegister(EventBinding<T> binding) => EventBus.DeRegister(binding);
         public static void Raise(T @event, Action<T> action = null) => EventBus.Raise(@event, action);
+    }
+
+    public interface ILocalEventBusSystem
+    {
+        public LocalEventBus EventBus { get; }
     }
 
     public class LocalEventBus
