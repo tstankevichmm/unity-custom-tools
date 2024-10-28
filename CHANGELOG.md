@@ -2,6 +2,11 @@
 
 All notable changes to this package will be documented in this file.
 
+## [1.0.44]
+Adding a ModifierObservableValue class with base float and int classes.
+
+This class is an extension of the Observable value class that incorporates the ability to add modifiers onto the value.
+
 ## [1.0.43]
 Added Animation Event System.
 

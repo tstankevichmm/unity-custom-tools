@@ -1,26 +1,27 @@
 using System;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 namespace CustomTools.Observer
 {
     [Serializable]
     public class ObserverValue<T>
     {
-        public T Value
+        public virtual T Value
         {
-            get => _value;
+            get => _baseValue;
             set => Set(value);
         }
         
-        [SerializeField] 
-        private T _value;
+        [FormerlySerializedAs("_value")] [SerializeField] 
+        protected T _baseValue;
         [NonSerialized]
-        private UnityEvent<T> _onValueChanged;
+        protected UnityEvent<T> _onValueChanged;
 
-        public ObserverValue(T value, UnityAction<T> callback = null)
+        public ObserverValue(T baseValue, UnityAction<T> callback = null)
         {
-            _value = value;
+            _baseValue = baseValue;
             _onValueChanged = new UnityEvent<T>();
             
             if(callback != null)
@@ -31,16 +32,16 @@ namespace CustomTools.Observer
 
         private void Set(T value)
         {
-            if (Equals(_value, value))
+            if (Equals(_baseValue, value))
                 return;
             
-            _value = value;
+            _baseValue = value;
             Invoke();
         }
 
         public void Invoke()
         {
-            _onValueChanged.Invoke(_value);
+            _onValueChanged.Invoke(Value);
         }
 
         public void AddListener(UnityAction<T> callback)
@@ -61,7 +62,7 @@ namespace CustomTools.Observer
     
         public override string ToString()
         {
-            return _value.ToString();
+            return _baseValue.ToString();
         }
     }
 }
