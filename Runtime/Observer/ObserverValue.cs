@@ -18,6 +18,8 @@ namespace CustomTools.Observer
         protected T _baseValue;
         [NonSerialized]
         protected UnityEvent<T> _onValueChanged;
+        
+        public ObserverValue() : this(default, null) { }
 
         public ObserverValue(T baseValue, UnityAction<T> callback = null)
         {

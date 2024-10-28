@@ -2,6 +2,9 @@
 
 All notable changes to this package will be documented in this file.
 
+## [1.0.45]
+Removing the float and int classes and replaced the system with a better ModifiableFloat class
+
 ## [1.0.44]
 Adding a ModifierObservableValue class with base float and int classes.
 
