@@ -39,16 +39,19 @@ namespace CustomTools.Observer
         public void UpdateBaseValue(T newBaseValue)
         {
             _baseValue = newBaseValue;
+            Invoke();
         }
 
         public void AddModifier(Modifier<T, U> modifier)
         {
             _modifiers.Add(modifier);
+            Invoke();
         }
 
         public void RemoveModifier(Modifier<T, U> modifier)
         {
             _modifiers.Remove(modifier);
+            Invoke();
         }
     }
     
