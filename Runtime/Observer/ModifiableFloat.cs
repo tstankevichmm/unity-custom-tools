@@ -102,7 +102,7 @@ namespace CustomTools.Observer
             return _modifiers.FindAll(mod => mod.ID == id).Count;
         }
 
-        private void UpdateBaseValue(float value)
+        public void UpdateBaseValue(float value)
         {
             _baseValue = value;
             _isDirty = true;
