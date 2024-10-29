@@ -2,6 +2,11 @@
 
 All notable changes to this package will be documented in this file.
 
+## [1.0.46]
+Added an ID to the float modifier.
+
+Also added functions to search and remove by this ID.
+
 ## [1.0.45]
 Removing the float and int classes and replaced the system with a better ModifiableFloat class
 

@@ -81,6 +81,27 @@ namespace CustomTools.Observer
             return amountRemoved;
         }
 
+        public int RemoveModifierByID(string id)
+        {
+            int amountRemoved = _modifiers.RemoveAll(mod => mod.ID == id);
+            
+            if (amountRemoved > 0)
+            {
+                _isDirty = true;
+                Invoke();
+            }
+
+            return amountRemoved;
+        }
+
+        public int GetModifierAmount(string id = "")
+        {
+            if (id == "")
+                return _modifiers.Count;
+            
+            return _modifiers.FindAll(mod => mod.ID == id).Count;
+        }
+
         private void UpdateBaseValue(float value)
         {
             _baseValue = value;
@@ -140,20 +161,22 @@ namespace CustomTools.Observer
     
     public class FloatModifier
     {
+        public readonly string ID;
         public readonly float Value;
         public readonly ModifiableFloatType Type;
         public readonly int Order;
         public readonly object Source;
         
-        public FloatModifier(float value, ModifiableFloatType type, object source, int order)
+        public FloatModifier(string id, float value, ModifiableFloatType type, object source, int order)
         {
+            ID = id;
             Value = value;
             Type = type;
             Source = source;
             Order = order;
         }
 
-        public FloatModifier(float value, ModifiableFloatType type, object source)
-            : this(value, type, source, (int)type){ }
+        public FloatModifier(string id, float value, ModifiableFloatType type, object source)
+            : this(id, value, type, source, (int)type){ }
     }
 }
