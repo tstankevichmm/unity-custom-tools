@@ -142,9 +142,9 @@ namespace CustomTools.EventBusSystem
             GetEventBus<T>().DeRegister(binding);
         }
 
-        public void Raise<T>(T @event) where T : IEvent
+        public void Raise<T>(T @event, Action<T> callback = null) where T : IEvent
         {
-            GetEventBus<T>().Raise(@event);
+            GetEventBus<T>().Raise(@event, callback);
         }
 
         private EventBus<T> GetEventBus<T>() where T : IEvent
