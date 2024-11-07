@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if UNITY_EDITOR
+using System;
 using System.Linq;
 using UnityEditor;
 using UnityEditor.Animations;
@@ -150,3 +151,4 @@ namespace CustomTools.AnimationEvents
         }
     }
 }
+#endif

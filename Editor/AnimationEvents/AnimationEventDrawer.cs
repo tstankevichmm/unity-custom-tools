@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿#if UNITY_EDITOR
+using UnityEditor;
 using UnityEngine;
 
 namespace CustomTools.AnimationEvents
@@ -31,3 +32,4 @@ namespace CustomTools.AnimationEvents
         }
     }
 }
+#endif

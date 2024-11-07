@@ -2,6 +2,9 @@
 
 All notable changes to this package will be documented in this file.
 
+## [1.0.47]
+Fixed some UnityEditor errors with building.
+
 ## [1.0.46]
 Added an ID to the float modifier.
 
