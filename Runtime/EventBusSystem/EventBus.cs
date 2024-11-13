@@ -141,8 +141,8 @@ namespace CustomTools.EventBusSystem
         {
             GetEventBus<T>().DeRegister(binding);
         }
-
-        public void Raise<T>(T eventToRaise, bool callGlobal = false, Action<T> callback = null) where T : IEvent
+        
+        public void Raise<T>(T eventToRaise, Action<T> callback = null, bool callGlobal = false) where T : IEvent
         {
             GetEventBus<T>().Raise(eventToRaise, (e) =>
             {
