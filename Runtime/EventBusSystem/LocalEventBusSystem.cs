@@ -4,11 +4,6 @@ namespace CustomTools.EventBusSystem
 {
     public class LocalEventBusSystem : MonoBehaviour, ILocalEventBusSystem
     {
-        public LocalEventBus EventBus { get; private set; }
-
-        private void Awake()
-        {
-            EventBus = new LocalEventBus();
-        }
+        public LocalEventBus EventBus { get; } = new();
     }
 }
