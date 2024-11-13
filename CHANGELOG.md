@@ -2,6 +2,9 @@
 
 All notable changes to this package will be documented in this file.
 
+## [1.0.48]
+Added a callGlobal parameter to local event buses.
+
 ## [1.0.47]
 Fixed some UnityEditor errors with building.
 
