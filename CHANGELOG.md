@@ -2,6 +2,9 @@
 
 All notable changes to this package will be documented in this file.
 
+## [1.1.0]
+Added new Sound Objects feature.
+
 ## [1.0.50]
 Raised the GlobalEventBus in the AnimationEventStateBehaviour after raising the LocalEventBus.
 
