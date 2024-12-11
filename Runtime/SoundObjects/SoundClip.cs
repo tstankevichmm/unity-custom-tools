@@ -3,7 +3,7 @@ using UnityEngine;
 namespace CustomTools.SoundObjects
 {
     [System.Serializable]
-    public struct SoundClip
+    public class SoundClip
     {
         public AudioClip clip;
         [Range(0f, 1f)] public float startTime;
