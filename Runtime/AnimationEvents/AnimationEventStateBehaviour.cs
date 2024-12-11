@@ -40,6 +40,17 @@ namespace CustomTools.AnimationEvents
         {
             NotifyEventReceiver(animator);
             NotifyLocalEventBus(animator);
+            NotifyGlobalEventBus(animator);
+        }
+
+        private void NotifyGlobalEventBus(Animator animator)
+        {
+            AnimationSignalEvent signalEvent = new AnimationSignalEvent()
+            {
+                eventName = _eventName
+            };
+            
+            GlobalEventBus<AnimationSignalEvent>.Raise(signalEvent);
         }
 
         private void NotifyLocalEventBus(Animator animator)

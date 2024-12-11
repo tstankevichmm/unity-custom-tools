@@ -2,6 +2,9 @@
 
 All notable changes to this package will be documented in this file.
 
+## [1.0.50]
+Raised the GlobalEventBus in the AnimationEventStateBehaviour after raising the LocalEventBus.
+
 ## [1.0.49]
 Added a LocalEventBusSystem monobehaviour.
 
