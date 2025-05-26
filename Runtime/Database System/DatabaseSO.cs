@@ -72,9 +72,8 @@ namespace CustomTools.DatabaseSystem
 
             return false;
         }
-
-        [ContextMenu("Add All SOs To Database")]
-        protected void AddAllToDatabase()
+        
+        public virtual void AddAllToDatabase()
         {
             T[] baseArray = GetAllInstances<T>();
 
