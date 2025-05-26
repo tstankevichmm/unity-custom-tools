@@ -2,6 +2,9 @@
 
 All notable changes to this package will be documented in this file.
 
+## [1.1.1]
+Modified the DatabaseSO to allow for Adding All To the Database via context menu.
+
 ## [1.1.0]
 Added new Sound Objects feature.
 

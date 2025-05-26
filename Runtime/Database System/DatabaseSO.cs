@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace CustomTools.DatabaseSystem
 {
-    public class DatabaseSO<T> : ScriptableObject where T : IDatabaseRecord
+    public class DatabaseSO<T> : ScriptableObject where T : ScriptableObject, IDatabaseRecord
     {
         public List<T> records = new List<T>();
 
@@ -73,6 +73,25 @@ namespace CustomTools.DatabaseSystem
             return false;
         }
 
+        [ContextMenu("Add All SOs To Database")]
+        protected void AddAllToDatabase()
+        {
+            T[] baseArray = GetAllInstances<T>();
+
+            foreach (T record in baseArray)
+            {
+                if(records.Contains(record))
+                    continue;
+
+                if (CheckForDuplicateIDs(record))
+                    continue;
+                
+                records.Add(record);
+            }
+            
+            UpdateDatabase();
+        }
+        
         protected static void AddAllToDatabase<V, U>() where V : DatabaseSO<U> where U : ScriptableObject, IDatabaseRecord
         {
             V mainDatabase = GatMainInstance<V>();
