@@ -4,6 +4,7 @@ namespace CustomTools.Singleton
 {
     public class SingletonMonoBehaviour<T> : MonoBehaviour where T : MonoBehaviour
     {
+        public static bool Exists => _instance != null;
         private static T _instance;
 
         public static T Instance
