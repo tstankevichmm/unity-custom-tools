@@ -19,7 +19,7 @@ namespace CustomTools.EventBusSystem
         
         private bool _eventInProgress;
         
-        public void Register(EventBinding<T> binding)
+        public void Register(IEventBinding<T> binding)
         {
             _pendingAdd.Add(binding);
             
@@ -27,7 +27,12 @@ namespace CustomTools.EventBusSystem
                 AddAllPending();
         }
 
-        public void DeRegister(EventBinding<T> binding) => _pendingRemoval.Add(binding);//_bindings.Remove(binding);
+        public List<IEventBinding<T>> GetBindings()
+        {
+            return new List<IEventBinding<T>>(_bindings);
+        }
+
+        public void DeRegister(IEventBinding<T> binding) => _pendingRemoval.Add(binding);//_bindings.Remove(binding);
 
         public void Raise(T eventToRaise, Action<T> callback = null)
         {
@@ -118,8 +123,9 @@ namespace CustomTools.EventBusSystem
     {
         private static readonly EventBus<T> EventBus = new EventBus<T>();
 
-        public static void Register(EventBinding<T> binding) => EventBus.Register(binding);
-        public static void DeRegister(EventBinding<T> binding) => EventBus.DeRegister(binding);
+        public static List<IEventBinding<T>> GetBindings() => EventBus.GetBindings();
+        public static void Register(IEventBinding<T> binding) => EventBus.Register(binding);
+        public static void DeRegister(IEventBinding<T> binding) => EventBus.DeRegister(binding);
         public static void Raise(T @event, Action<T> action = null) => EventBus.Raise(@event, action);
     }
 

@@ -2,6 +2,9 @@
 
 All notable changes to this package will be documented in this file.
 
+## [1.1.3]
+Adding some helper information for EventBindings.
+
 ## [1.1.2]
 Adding an Exists variable to SingletonMonoBehaviours.
 

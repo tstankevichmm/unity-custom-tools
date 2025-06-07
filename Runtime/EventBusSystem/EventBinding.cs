@@ -4,13 +4,15 @@ namespace CustomTools.EventBusSystem
 {
     public class EventBinding<T> : IEventBinding<T> where T : IEvent
     {
+        public string BindingID { get; }
         public int Priority { get; set; }
         public Action<T, Action> OnEventCallback { get; set; }
         public Action<T> OnEvent { get; set; }
         public Action OnEventNoArgs { get; set; }
-
+        
         public EventBinding(Action<T, Action> onEventCallback, int priority = 0, bool autoRegisterGlobally = false)
         {
+            BindingID = Guid.NewGuid().ToString();
             OnEventCallback = onEventCallback;
             Priority = priority;
             
