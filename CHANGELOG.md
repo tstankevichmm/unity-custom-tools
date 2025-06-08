@@ -2,6 +2,9 @@
 
 All notable changes to this package will be documented in this file.
 
+## [1.1.4]
+Adding async operations to the EventBus, starting to phase out the callback functions.
+
 ## [1.1.3]
 Adding some helper information for EventBindings.
 

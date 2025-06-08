@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 
 namespace CustomTools.EventBusSystem
 {
@@ -9,7 +10,8 @@ namespace CustomTools.EventBusSystem
         public Action<T, Action> OnEventCallback { get; set; }
         public Action<T> OnEvent { get; set; }
         public Action OnEventNoArgs { get; set; }
-        
+        public Func<T, Task> OnEventAsync { get; set; }
+
         public EventBinding(Action<T, Action> onEventCallback, int priority = 0, bool autoRegisterGlobally = false)
         {
             BindingID = Guid.NewGuid().ToString();

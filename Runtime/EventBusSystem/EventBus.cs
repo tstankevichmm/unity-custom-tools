@@ -34,7 +34,7 @@ namespace CustomTools.EventBusSystem
 
         public void DeRegister(IEventBinding<T> binding) => _pendingRemoval.Add(binding);//_bindings.Remove(binding);
 
-        public void Raise(T eventToRaise, Action<T> callback = null)
+        public async Task Raise(T eventToRaise, Action<T> callback = null)
         {
             EventData<T> eventData = new EventData<T>()
             {
@@ -50,10 +50,10 @@ namespace CustomTools.EventBusSystem
                 AddAllPending();
             }
             
-            RaiseNextEvent();
+            await RaiseNextEvent();
         }
 
-        private async void RaiseNextEvent()
+        private async Task RaiseNextEvent()
         {
             if (_eventInProgress)
                 return;
@@ -70,17 +70,22 @@ namespace CustomTools.EventBusSystem
                 binding.OnEvent?.Invoke(nextEventData.eventToRaise);
                 binding.OnEventNoArgs?.Invoke();
 
-                if (binding.OnEventCallback == null) 
+                if (binding.OnEventCallback != null)
+                {
+                    callbackComplete = false;
+                    binding.OnEventCallback?.Invoke(nextEventData.eventToRaise, () =>
+                    {
+                        callbackComplete = true;
+                    });
+
+                    while(callbackComplete != true)
+                        await Task.Yield();
+                }
+
+                if(binding.OnEventAsync == null)
                     continue;
                 
-                callbackComplete = false;
-                binding.OnEventCallback?.Invoke(nextEventData.eventToRaise, () =>
-                {
-                    callbackComplete = true;
-                });
-                    
-                while(callbackComplete != true)
-                    await Task.Yield();
+                await binding.OnEventAsync.Invoke(nextEventData.eventToRaise);
             }
 
             nextEventData.callback?.Invoke(nextEventData.eventToRaise);
@@ -88,13 +93,13 @@ namespace CustomTools.EventBusSystem
             RemoveAllPending();
             AddAllPending();
             
-            RaiseComplete();
+            await RaiseComplete();
         }
 
-        private void RaiseComplete()
+        private async Task RaiseComplete()
         {
             _eventInProgress = false;
-            RaiseNextEvent();
+            await RaiseNextEvent();
         }
 
         private void RemoveAllPending()
