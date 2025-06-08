@@ -131,7 +131,7 @@ namespace CustomTools.EventBusSystem
         public static List<IEventBinding<T>> GetBindings() => EventBus.GetBindings();
         public static void Register(IEventBinding<T> binding) => EventBus.Register(binding);
         public static void DeRegister(IEventBinding<T> binding) => EventBus.DeRegister(binding);
-        public static void Raise(T @event, Action<T> action = null) => EventBus.Raise(@event, action);
+        public static async Task Raise(T @event, Action<T> action = null) => await EventBus.Raise(@event, action);
     }
 
     public interface ILocalEventBusSystem
@@ -153,15 +153,14 @@ namespace CustomTools.EventBusSystem
             GetEventBus<T>().DeRegister(binding);
         }
         
-        public void Raise<T>(T eventToRaise, Action<T> callback = null, bool callGlobal = false) where T : IEvent
+        public async Task Raise<T>(T eventToRaise, Action<T> callback = null, bool callGlobal = false) where T : IEvent
         {
-            GetEventBus<T>().Raise(eventToRaise, (e) =>
-            {
-                if (!callGlobal)
-                    callback?.Invoke(e);
-                else
-                    GlobalEventBus<T>.Raise(eventToRaise, callback);
-            });
+            await GetEventBus<T>().Raise(eventToRaise);
+            
+            if (!callGlobal)
+                callback?.Invoke(eventToRaise);
+            else
+                await GlobalEventBus<T>.Raise(eventToRaise, callback);
         }
 
         private EventBus<T> GetEventBus<T>() where T : IEvent
