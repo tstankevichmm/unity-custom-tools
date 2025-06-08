@@ -63,24 +63,11 @@ namespace CustomTools.EventBusSystem
             
             _eventInProgress = true;
             EventData<T> nextEventData = _eventQueue.Dequeue();
-            bool callbackComplete = true;
             
             foreach (IEventBinding<T> binding in _bindings)
             {
                 binding.OnEvent?.Invoke(nextEventData.eventToRaise);
                 binding.OnEventNoArgs?.Invoke();
-
-                if (binding.OnEventCallback != null)
-                {
-                    callbackComplete = false;
-                    binding.OnEventCallback?.Invoke(nextEventData.eventToRaise, () =>
-                    {
-                        callbackComplete = true;
-                    });
-
-                    while(callbackComplete != true)
-                        await Task.Yield();
-                }
 
                 if(binding.OnEventAsync == null)
                     continue;
