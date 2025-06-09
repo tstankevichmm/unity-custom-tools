@@ -148,6 +148,11 @@ namespace CustomTools.EventBusSystem
                 await GlobalEventBus<T>.Raise(eventToRaise);
         }
 
+        public List<IEventBinding<T>> GetBindings<T>() where T : IEvent
+        {
+            return GetEventBus<T>().GetBindings();
+        }
+
         private EventBus<T> GetEventBus<T>() where T : IEvent
         {
             if (_eventBuses.TryGetValue(typeof(T), out var eventBus)) 
