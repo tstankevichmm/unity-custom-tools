@@ -140,14 +140,12 @@ namespace CustomTools.EventBusSystem
             GetEventBus<T>().DeRegister(binding);
         }
         
-        public async Task Raise<T>(T eventToRaise, Action<T> callback = null, bool callGlobal = false) where T : IEvent
+        public async Task Raise<T>(T eventToRaise, bool callGlobal = false) where T : IEvent
         {
             await GetEventBus<T>().Raise(eventToRaise);
             
-            if (!callGlobal)
-                callback?.Invoke(eventToRaise);
-            else
-                await GlobalEventBus<T>.Raise(eventToRaise, callback);
+            if (callGlobal)
+                await GlobalEventBus<T>.Raise(eventToRaise);
         }
 
         private EventBus<T> GetEventBus<T>() where T : IEvent
