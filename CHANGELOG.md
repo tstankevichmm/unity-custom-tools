@@ -2,6 +2,9 @@
 
 All notable changes to this package will be documented in this file.
 
+## [1.2.0]
+Adding the Game Action System.
+
 ## [1.1.5]
 Adding a builder to the EventBinding class
 
