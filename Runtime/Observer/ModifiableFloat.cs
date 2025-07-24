@@ -9,7 +9,8 @@ namespace CustomTools.Observer
     {
         Flat = 100,
         PercentageAdditive = 200,
-        PercentageMultiply = 300,
+        IncreasePercentage = 300,
+        PercentageMultiplicative = 400,
         Override = int.MaxValue
     }
     
@@ -133,8 +134,11 @@ namespace CustomTools.Observer
                             sumPercentAdd = 0;
                         }
                         break;
-                    case ModifiableFloatType.PercentageMultiply:
+                    case ModifiableFloatType.IncreasePercentage:
                         finalTotal *= 1 + modifier.Value;
+                        break;
+                    case ModifiableFloatType.PercentageMultiplicative:
+                        finalTotal *= modifier.Value;
                         break;
                     case ModifiableFloatType.Override:
                         finalTotal = modifier.Value;
@@ -165,9 +169,9 @@ namespace CustomTools.Observer
         public readonly float Value;
         public readonly ModifiableFloatType Type;
         public readonly int Order;
-        public readonly object Source;
+        public readonly IModSource Source;
         
-        public FloatModifier(string id, float value, ModifiableFloatType type, object source, int order)
+        public FloatModifier(string id, float value, ModifiableFloatType type, IModSource source, int order)
         {
             ID = id;
             Value = value;
@@ -176,7 +180,12 @@ namespace CustomTools.Observer
             Order = order;
         }
 
-        public FloatModifier(string id, float value, ModifiableFloatType type, object source)
+        public FloatModifier(string id, float value, ModifiableFloatType type, IModSource source)
             : this(id, value, type, source, (int)type){ }
+    }
+
+    public interface IModSource
+    {
+        public string GetName();
     }
 }

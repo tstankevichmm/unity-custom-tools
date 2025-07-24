@@ -2,6 +2,9 @@
 
 All notable changes to this package will be documented in this file.
 
+## [1.2.1]
+Adjusted the modifiable float to have a different multiplication.  Changed the source to have the IMod interface.
+
 ## [1.2.0]
 Adding the Game Action System.
 
