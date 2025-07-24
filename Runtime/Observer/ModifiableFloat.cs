@@ -165,13 +165,13 @@ namespace CustomTools.Observer
     
     public class FloatModifier
     {
-        public readonly string ID;
-        public readonly float Value;
-        public readonly ModifiableFloatType Type;
-        public readonly int Order;
-        public readonly IModSource Source;
+        public string ID { get; }
+        public float Value { get; }
+        public ModifiableFloatType Type { get; }
+        public int Order { get; }
+        public IModSource Source { get; }
         
-        public FloatModifier(string id, float value, ModifiableFloatType type, IModSource source, int order)
+        public FloatModifier(string id, float value, ModifiableFloatType type, IModSource source, int order = 0)
         {
             ID = id;
             Value = value;
@@ -180,8 +180,10 @@ namespace CustomTools.Observer
             Order = order;
         }
 
-        public FloatModifier(string id, float value, ModifiableFloatType type, IModSource source)
-            : this(id, value, type, source, (int)type){ }
+        public virtual string GetDescription()
+        {
+            return $"{Source.GetName()}: {Value}";
+        }
     }
 
     public interface IModSource
