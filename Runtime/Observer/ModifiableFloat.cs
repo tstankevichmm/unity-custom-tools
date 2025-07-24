@@ -171,14 +171,16 @@ namespace CustomTools.Observer
         public int Order { get; }
         public IModSource Source { get; }
         
-        public FloatModifier(string id, float value, ModifiableFloatType type, IModSource source, int order = 0)
+        public FloatModifier(string id, float value, ModifiableFloatType type, IModSource source, int? order = null)
         {
             ID = id;
             Value = value;
             Type = type;
             Source = source;
-            Order = order;
+            Order = order ?? (int)type;
         }
+
+        public virtual string GetName() => Source.GetName();
 
         public virtual string GetDescription()
         {
