@@ -13,12 +13,30 @@ namespace CustomTools.Observer
         PercentageMultiplicative = 400,
         Override = int.MaxValue
     }
-    
+
     [Serializable]
-    public class ModifiableFloat<T> : ModifiableNumber<T, float> where T : IModSource { }
-    
+    public class ModifiableFloat<T> : ModifiableNumber<T, float> where T : IModSource
+    {
+        public ModifiableFloat() : this(0, null) { }
+
+        public ModifiableFloat(float baseValue, UnityAction<float> callback = null)
+            : base(baseValue, callback)
+        {
+            
+        }
+    }
+
     [Serializable]
-    public class ModifiableInt<T> : ModifiableNumber<T, int> where T : IModSource { }
+    public class ModifiableInt<T> : ModifiableNumber<T, int> where T : IModSource
+    {
+        public ModifiableInt() : this(0, null) { }
+
+        public ModifiableInt(int baseValue, UnityAction<int> callback = null)
+            : base(baseValue, callback)
+        {
+            
+        }
+    }
 
     
     [Serializable]
