@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 namespace CustomTools.Observer
 {
-    public enum ModifiableFloatType
+    public enum ModifiableNumberType
     {
         Flat = 100,
         PercentageAdditive = 200,
@@ -15,9 +15,16 @@ namespace CustomTools.Observer
     }
     
     [Serializable]
-    public class ModifiableFloat<T> : ObserverValue<float>
+    public class ModifiableFloat<T> : ModifiableNumber<T, float> where T : IModSource { }
+    
+    [Serializable]
+    public class ModifiableInt<T> : ModifiableNumber<T, int> where T : IModSource { }
+
+    
+    [Serializable]
+    public abstract class ModifiableNumber<T, U> : ObserverValue<U> where T : IModSource where U : struct, IComparable<U>, IConvertible
     {
-        public override float Value
+        public override U Value
         {
             get
             {
@@ -32,23 +39,23 @@ namespace CustomTools.Observer
             set => UpdateBaseValue(value);
         }
 
-        public readonly ReadOnlyCollection<FloatModifier> Modifiers;
-        public float BaseValue => _baseValue;
+        public readonly ReadOnlyCollection<NumberModifier<U>> Modifiers;
+        public U BaseValue => _baseValue;
 
         private bool _isDirty = true;
-        private float _value;
-        private readonly List<FloatModifier> _modifiers;
+        private U _value;
+        private readonly List<NumberModifier<U>> _modifiers;
         
-        public ModifiableFloat() : this(0, null) { }
+        public ModifiableNumber() : this(default, null) { }
         
-        public ModifiableFloat(float baseValue, UnityAction<float> callback = null) 
+        public ModifiableNumber(U baseValue, UnityAction<U> callback = null) 
             : base(baseValue, callback)
         {
-            _modifiers = new List<FloatModifier>();
+            _modifiers = new List<NumberModifier<U>>();
             Modifiers = _modifiers.AsReadOnly();
         }
 
-        public void AddModifier(FloatModifier mod)
+        public void AddModifier(NumberModifier<U> mod)
         {
             _modifiers.Add(mod);
             _modifiers.Sort(CompareModifierOrder);
@@ -56,7 +63,7 @@ namespace CustomTools.Observer
             Invoke();
         }
 
-        public bool RemoveModifier(FloatModifier mod)
+        public bool RemoveModifier(NumberModifier<U> mod)
         {
             bool wasRemoved = _modifiers.Remove(mod);
 
@@ -103,55 +110,56 @@ namespace CustomTools.Observer
             return _modifiers.FindAll(mod => mod.ID == id).Count;
         }
 
-        public void UpdateBaseValue(float value)
+        public void UpdateBaseValue(U value)
         {
             _baseValue = value;
             _isDirty = true;
             Invoke();
         }
 
-        private float CalculateTotal()
+        private U CalculateTotal()
         {
-            float finalTotal = _baseValue;
-            float sumPercentAdd = 0;
+            double finalTotal = Convert.ToDouble(_baseValue);
+            double sumPercentAdd = 0;
 
             for(var i = 0; i < _modifiers.Count; i++)
             {
-                FloatModifier modifier = _modifiers[i];
+                NumberModifier<U> modifier = _modifiers[i];
+                double modValue = Convert.ToDouble(modifier.Value);
                 
                 switch (modifier.Type)
                 {
-                    case ModifiableFloatType.Flat:
-                        finalTotal += modifier.Value;
+                    case ModifiableNumberType.Flat:
+                        finalTotal += modValue;
                         break;
-                    case ModifiableFloatType.PercentageAdditive:
-                        sumPercentAdd += modifier.Value;
+                    case ModifiableNumberType.PercentageAdditive:
+                        sumPercentAdd += modValue;
 
                         if (i + 1 >= _modifiers.Count ||
-                            _modifiers[i + 1].Type != ModifiableFloatType.PercentageAdditive)
+                            _modifiers[i + 1].Type != ModifiableNumberType.PercentageAdditive)
                         {
                             finalTotal *= 1 + sumPercentAdd;
                             sumPercentAdd = 0;
                         }
                         break;
-                    case ModifiableFloatType.IncreasePercentage:
-                        finalTotal *= 1 + modifier.Value;
+                    case ModifiableNumberType.IncreasePercentage:
+                        finalTotal *= 1 + modValue;
                         break;
-                    case ModifiableFloatType.PercentageMultiplicative:
-                        finalTotal *= modifier.Value;
+                    case ModifiableNumberType.PercentageMultiplicative:
+                        finalTotal *= modValue;
                         break;
-                    case ModifiableFloatType.Override:
-                        finalTotal = modifier.Value;
+                    case ModifiableNumberType.Override:
+                        finalTotal = modValue;
                         break;
                     default:
                         throw new ArgumentOutOfRangeException();
                 }
             }
             
-            return finalTotal;
+            return (U)Convert.ChangeType(finalTotal, typeof(U));
         }
 
-        private static int CompareModifierOrder(FloatModifier a, FloatModifier b)
+        private static int CompareModifierOrder(NumberModifier<U> a, NumberModifier<U> b)
         {
             if (a.Order < b.Order)
                 return -1;
@@ -163,15 +171,16 @@ namespace CustomTools.Observer
         }
     }
     
-    public class FloatModifier
+    
+    public abstract class NumberModifier<T> where T : struct, IComparable<T>, IConvertible
     {
         public string ID { get; }
-        public float Value { get; }
-        public ModifiableFloatType Type { get; }
+        public T Value { get; }
+        public ModifiableNumberType Type { get; }
         public int Order { get; }
         public IModSource Source { get; }
         
-        public FloatModifier(string id, float value, ModifiableFloatType type, IModSource source, int? order = null)
+        public NumberModifier(string id, T value, ModifiableNumberType type, IModSource source, int? order = null)
         {
             ID = id;
             Value = value;
@@ -185,6 +194,24 @@ namespace CustomTools.Observer
         public virtual string GetDescription()
         {
             return $"{Source.GetName()}: {Value}";
+        }
+    }
+    
+    public class FloatModifier : NumberModifier<float>
+    {
+        public FloatModifier(string id, float value, ModifiableNumberType type, IModSource source, int? order = null) 
+            : base(id, value, type, source, order)
+        {
+            
+        }
+    }
+    
+    public class IntModifier : NumberModifier<int>
+    {
+        public IntModifier(string id, int value, ModifiableNumberType type, IModSource source, int? order = null) 
+            : base(id, value, type, source, order)
+        {
+            
         }
     }
 
