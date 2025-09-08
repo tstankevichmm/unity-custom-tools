@@ -81,6 +81,14 @@ namespace CustomTools.Observer
             Invoke();
         }
 
+        public void AddModifierRange(IEnumerable<NumberModifier<U>> mods)
+        {
+            _modifiers.AddRange(mods);
+            _modifiers.Sort(CompareModifierOrder);
+            _isDirty = true;
+            Invoke();
+        }
+
         public bool RemoveModifier(NumberModifier<U> mod)
         {
             bool wasRemoved = _modifiers.Remove(mod);
@@ -118,6 +126,16 @@ namespace CustomTools.Observer
             }
 
             return amountRemoved;
+        }
+
+        public void ClearAllModifiers()
+        {
+            if (_modifiers.Count == 0)
+                return;
+            
+            _modifiers.Clear();
+            _isDirty = true;
+            Invoke();
         }
 
         public int GetModifierAmount(string id = "")
