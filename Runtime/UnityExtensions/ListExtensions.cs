@@ -9,6 +9,11 @@ namespace CustomTools.UnityExtensions
         {
             return string.Join(separator, list.Select((x => x.ToString())));
         }
+
+        public static int LastIndex<T>(this List<T> list)
+        {
+            return list.Count - 1;
+        }
         
         public static List<T> Shuffle<T>(this List<T> list, System.Random rng, int shuffleAmt = 1)
         {
