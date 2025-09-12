@@ -7,8 +7,12 @@ namespace CustomTools.ActionSystem
     public interface IGameActionSystem
     {
         public const int Start = -1000;
-        public const int Pre = -1;
-        public const int Post = 1;
+        public const int EarlyPre = -750;
+        public const int Pre = -500;
+        public const int LatePre = -250;
+        public const int EarlyPost = 250;
+        public const int Post = 500;
+        public const int LatePost = 750;
         public const int Finish = 1000;
     
         public ObserverValue<bool> IsPerforming { get; }
