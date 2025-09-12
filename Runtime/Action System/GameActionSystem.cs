@@ -17,14 +17,15 @@ namespace CustomTools.ActionSystem
         
         private List<PerformData> _reactions = null;
         private IGameAction _currentGameAction;
+        private bool _shouldLog;
 
         public async void Perform(IGameAction action, Action<IGameAction> callback = null) 
         {
-            Debug.Log($"GameActionSystem.Perform: Perform action of type {action.GetType()}");
+            Log($"GameActionSystem.Perform: Perform action of type {action.GetType()}");
             
             if (IsPerforming)
             {
-                Debug.Log($"GameActionSystem.Perform: Already performing action {_currentGameAction.GetType()}, will perform {action.GetType()} as a reaction.");
+                Log($"GameActionSystem.Perform: Already performing action {_currentGameAction.GetType()}, will perform {action.GetType()} as a reaction.");
                 
                 PerformData reactionPerformData = new PerformData()
                 {
@@ -34,7 +35,6 @@ namespace CustomTools.ActionSystem
                 
                 await ActionFlow(reactionPerformData);
                 reactionPerformData.callback?.Invoke(reactionPerformData.action);
-                //AddReaction(action, callback);
                 return;
             }
             
@@ -46,7 +46,7 @@ namespace CustomTools.ActionSystem
                 callback = callback
             };
             
-            Debug.Log($"GameActionSystem.ResolveQueue: Resolve action of type {data.action.GetType()}");
+            Log($"GameActionSystem.ResolveQueue: Resolve action of type {data.action.GetType()}");
                 
             await ActionFlow(data);
                 
@@ -54,12 +54,17 @@ namespace CustomTools.ActionSystem
             data.callback?.Invoke(data?.action);
         }
 
+        public void SetShouldLog(bool shouldLog)
+        {
+            _shouldLog = shouldLog;
+        }
+        
         private async Task PerformReactions()
         {
-            Debug.Log($"GameActionSystem.PerformReactions: Perform {_reactions.Count} Reactions");
+            Log($"GameActionSystem.PerformReactions: Perform {_reactions.Count} Reactions");
             foreach (PerformData data in _reactions)
             {
-                Debug.Log($"\t{data.action.GetType()}");
+                Log($"\t{data.action.GetType()}");
             }
             
             foreach (PerformData data in _reactions)
@@ -68,7 +73,7 @@ namespace CustomTools.ActionSystem
                 data.callback?.Invoke(data.action);
             }
             
-            Debug.Log("GameActionSystem.PerformReactions: Perform Reactions Complete");
+            Log("GameActionSystem.PerformReactions: Perform Reactions Complete");
         }
 
         private async Task ActionFlow(PerformData performData)
@@ -77,20 +82,20 @@ namespace CustomTools.ActionSystem
             
             _currentGameAction = gameAction;
             Type type = gameAction.GetType();
-            Debug.Log($"GameActionSystem.ActionFlow: {type}");
+            Log($"GameActionSystem.ActionFlow: {type}");
             
             _reactions = gameAction.PreReactions;
 
             if (_subscriptions.ContainsKey(type))
             {
-                Debug.Log("GameActionSystem.ActionFlow: Perform Pre Subscribers");
+                Log("GameActionSystem.ActionFlow: Perform Pre Subscribers");
                 List<SubscriptionData> preSubs = _subscriptions[gameAction.GetType()].Where(x => x.priority < 0).ToList();
                 await PerformSubscribers(gameAction, preSubs);
             }
 
             await PerformReactions();
 
-            Debug.Log("GameActionSystem.ActionFlow: Perform");
+            Log("GameActionSystem.ActionFlow: Perform");
             _reactions = gameAction.PerformReactions;
             await PerformPerformer(gameAction);
             await PerformReactions();
@@ -99,7 +104,7 @@ namespace CustomTools.ActionSystem
 
             if (_subscriptions.ContainsKey(type))
             {
-                Debug.Log("GameActionSystem.ActionFlow: Perform Post Subscribers");
+                Log("GameActionSystem.ActionFlow: Perform Post Subscribers");
                 List<SubscriptionData> postSubs = _subscriptions[gameAction.GetType()].Where(x => x.priority >= 0).ToList();
                 await PerformSubscribers(gameAction, postSubs);
             }
@@ -205,6 +210,14 @@ namespace CustomTools.ActionSystem
             };
             
             _reactions.Add(data);
+        }
+
+        private void Log(string message)
+        {
+            if (!_shouldLog)
+                return;
+            
+            Debug.Log(message);
         }
     }
 }
