@@ -6,6 +6,7 @@ namespace CustomTools.ActionSystem
 {
     public interface IGameAction : IEvent
     {
+        public object Triggerer { get; }
         public List<PerformData> PreReactions { get; }
         public List<PerformData> PerformReactions { get; }
         public List<PerformData> PostReactions { get; }
