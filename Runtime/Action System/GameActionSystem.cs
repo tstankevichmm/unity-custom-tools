@@ -24,8 +24,17 @@ namespace CustomTools.ActionSystem
             
             if (IsPerforming)
             {
-                Debug.Log($"GameActionSystem.Perform: Already performing action {_currentGameAction.GetType()}, will add {action.GetType()} as a reaction.");
-                AddReaction(action, callback);
+                Debug.Log($"GameActionSystem.Perform: Already performing action {_currentGameAction.GetType()}, will perform {action.GetType()} as a reaction.");
+                
+                PerformData reactionPerformData = new PerformData()
+                {
+                    action = action,
+                    callback = callback
+                };
+                
+                await ActionFlow(reactionPerformData);
+                reactionPerformData.callback?.Invoke(reactionPerformData.action);
+                //AddReaction(action, callback);
                 return;
             }
             
