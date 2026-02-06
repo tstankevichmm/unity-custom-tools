@@ -57,23 +57,23 @@ namespace CustomTools.Observer
             set => UpdateBaseValue(value);
         }
 
-        public readonly ReadOnlyCollection<NumberModifier<U>> Modifiers;
+        public readonly ReadOnlyCollection<NumberModifier<double>> Modifiers;
         public U BaseValue => _baseValue;
 
         private bool _isDirty = true;
         private U _value;
-        private readonly List<NumberModifier<U>> _modifiers;
+        private readonly List<NumberModifier<double>> _modifiers;
         
         public ModifiableNumber() : this(default, null) { }
         
         public ModifiableNumber(U baseValue, UnityAction<U> callback = null) 
             : base(baseValue, callback)
         {
-            _modifiers = new List<NumberModifier<U>>();
+            _modifiers = new List<NumberModifier<double>>();
             Modifiers = _modifiers.AsReadOnly();
         }
 
-        public void AddModifier(NumberModifier<U> mod)
+        public void AddModifier(NumberModifier<double> mod)
         {
             _modifiers.Add(mod);
             _modifiers.Sort(CompareModifierOrder);
@@ -81,7 +81,7 @@ namespace CustomTools.Observer
             Invoke();
         }
 
-        public void AddModifierRange(IEnumerable<NumberModifier<U>> mods)
+        public void AddModifierRange(IEnumerable<NumberModifier<double>> mods)
         {
             _modifiers.AddRange(mods);
             _modifiers.Sort(CompareModifierOrder);
@@ -89,7 +89,7 @@ namespace CustomTools.Observer
             Invoke();
         }
 
-        public bool RemoveModifier(NumberModifier<U> mod)
+        public bool RemoveModifier(NumberModifier<double> mod)
         {
             bool wasRemoved = _modifiers.Remove(mod);
 
@@ -160,8 +160,8 @@ namespace CustomTools.Observer
 
             for(var i = 0; i < _modifiers.Count; i++)
             {
-                NumberModifier<U> modifier = _modifiers[i];
-                double modValue = Convert.ToDouble(modifier.Value);
+                NumberModifier<double> modifier = _modifiers[i];
+                double modValue = modifier.Value;
                 
                 switch (modifier.Type)
                 {
@@ -195,7 +195,7 @@ namespace CustomTools.Observer
             return (U)Convert.ChangeType(finalTotal, typeof(U));
         }
 
-        private static int CompareModifierOrder(NumberModifier<U> a, NumberModifier<U> b)
+        private static int CompareModifierOrder(NumberModifier<double> a, NumberModifier<double> b)
         {
             if (a.Order < b.Order)
                 return -1;
