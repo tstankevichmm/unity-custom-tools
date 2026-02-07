@@ -215,6 +215,8 @@ namespace CustomTools.Observer
         public ModifiableNumberType Type { get; }
         public int Order { get; }
         public IModSource Source { get; }
+
+        private string _nameOverride;
         
         public NumberModifier(string id, T value, ModifiableNumberType type, IModSource source, int? order = null)
         {
@@ -225,7 +227,12 @@ namespace CustomTools.Observer
             Order = order ?? (int)type;
         }
 
-        public virtual string GetName() => Source.GetName();
+        public void SetName(string nameDisplay)
+        {
+            _nameOverride = nameDisplay;
+        }
+
+        public virtual string GetName() => string.IsNullOrEmpty(_nameOverride) ? Source.GetName() : _nameOverride;
 
         public virtual string GetDescription()
         {
