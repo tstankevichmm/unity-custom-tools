@@ -64,7 +64,10 @@ namespace CustomTools.DatabaseSystem
             foreach (T databaseRecord in records)
             {
                 if (databaseRecord.ID == record.ID)
+                {
+                    Debug.LogWarning($"Record {databaseRecord.name} and {record.name} have the same ID ({databaseRecord.ID})");
                     idCount++;
+                }
 
                 if (idCount > 1)
                     return true;
@@ -84,12 +87,13 @@ namespace CustomTools.DatabaseSystem
 
                 if (CheckForDuplicateIDs(record))
                     continue;
-                
+
                 records.Add(record);
             }
             
             UpdateDatabase();
         }
+        
         
         protected static void AddAllToDatabase<V, U>() where V : DatabaseSO<U> where U : ScriptableObject, IDatabaseRecord
         {
